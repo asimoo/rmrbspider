@@ -12,8 +12,8 @@ BOT_NAME = 'rmrb'
 
 SPIDER_MODULES = ['rmrb.spiders']
 NEWSPIDER_MODULE = 'rmrb.spiders'
-FEED_URI = 'items.json'
-FEED_FORMAT = 'json'
+ITEM_PIPELINES = {'rmrb.pipelines.JsonWriterPipeline':100}
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'rmrb (+http://www.yourdomain.com)'

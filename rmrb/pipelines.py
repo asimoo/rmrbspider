@@ -6,6 +6,15 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 
-class RmrbPipeline(object):
+import json
+import codecs
+
+class JsonWriterPipeline(object):
+
+    def __init__(self):
+        self.file = codecs.open('items.json', 'w', encoding='utf-8')
+
     def process_item(self, item, spider):
+        line = json.dumps(dict(item)) + "\n"
+        self.file.write(line.decode('unicode_escape'))
         return item
