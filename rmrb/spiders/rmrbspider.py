@@ -13,8 +13,10 @@ def CreateUrl(begin, end):
             month = today.strftime('%m')
             day = today.strftime('%d')
             todaystr = today.strftime('%Y%m%d')
-            tempurl = urlpart1 + year + "-" + month + "/" + day + urlpart2 + todaystr + "_1-01" +postfix
-            urllist.append(tempurl)
+            for j in range(1,6):
+                    for k in range(1,4):
+                            tempurl = urlpart1 + year + "-" + month + "/" + day + urlpart2 + todaystr + "_" + str(j) +"-0" + str(k) +postfix
+                            urllist.append(tempurl)
         return urllist
 
 class RmrbSpider(scrapy.Spider):
@@ -28,7 +30,7 @@ class RmrbSpider(scrapy.Spider):
 ##        "http://paper.people.com.cn/rmrb/html/2016-01/08/nw.D110000renmrb_20160108_1-01.htm",
 ##        "http://paper.people.com.cn/rmrb/html/2016-01/11/nw.D110000renmrb_20160111_1-01.htm"
 ##        ]
-    print start_urls
+##    print start_urls
 
     def parse(self,response):
         item = Website()
@@ -49,7 +51,7 @@ class RmrbSpider(scrapy.Spider):
         item['text'] = itext+"\n"
         tr4w = TextRank4Keyword()
 
-        tr4w.analyze(text=itext, lower=True, window=2)
+        tr4w.analyze(text=itext, lower=True, window=3)
         keylist = tr4w.get_keywords(10, word_min_len=2)
         wordlist = []
         for listitem in keylist:
